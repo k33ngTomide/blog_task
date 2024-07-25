@@ -5,10 +5,12 @@ import swaggerUi from 'swagger-ui-express';
 import authRoutes from './routes/authRoutes';
 import postRoutes from './routes/postRoutes';
 import { swaggerOptions } from './config/swaggerConfig';
+import cors from 'cors'; // Import the 'cors' module
 
 const app = express();
 
 app.use(express.json());
+app.use(cors()); // Use 'cors' as middleware
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

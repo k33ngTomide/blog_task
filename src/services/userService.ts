@@ -19,7 +19,7 @@ const registerUser = async (username: string, email: string, password: string) =
   await newUser.save();
 
   const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET || "defaultSecret", { expiresIn: process.env.JWT_EXPIRE || "1h"});
-  return { token, userId: newUser._id }
+  return { token, user: newUser };
 }
 
 const loginUser = async (email: string, password: string) => {
@@ -36,7 +36,7 @@ const loginUser = async (email: string, password: string) => {
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "defaultSecret", { expiresIn: process.env.JWT_EXPIRE || "1h"});
 
-  return{ token, userId: user._id };
+  return{ token, user: user };
 }
 
 export { registerUser, loginUser };
